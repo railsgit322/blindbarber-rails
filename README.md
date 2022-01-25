@@ -2,22 +2,13 @@
 
 This ruby on rails app serves as the API integration into the Blind Barber iOS app.
 
-Things you may want to cover:
+## Requirements
 
-- Ruby version
+- ruby 3.1.0p0
+- Rails 7.0.1
+- bundler 2.3.3
+- postgres
 
-- System dependencies
+## Start
 
-- Configuration
-
-- Database creation
-
-- Database initialization
-
-- How to run the test suite
-
-- Services (job queues, cache servers, search engines, etc.)
-
-- Deployment instructions
-
-- ...
+`rails s`
