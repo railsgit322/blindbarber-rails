@@ -11,9 +11,9 @@ Rails.application.routes.draw do
       
       post 'auth/login', to: 'authentication#login'
       post 'auth/refresh', to: 'authentication#refresh'
+      resources :user, only: [:index]
       
       resources :users, only: %i[show index update create] do
-      
       
       end
       

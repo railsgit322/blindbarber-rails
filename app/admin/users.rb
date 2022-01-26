@@ -15,4 +15,25 @@ ActiveAdmin.register User do
   #   permitted
   # end
   
+  
+  menu priority: 1
+  permit_params :first_name, :last_name, :avatar, :email
+  filter :first_name
+  filter :last_name
+  filter :email
+  
+  index do
+    selectable_column
+    column :id
+    column 'Avatar' do |user|
+      image_tag(user.avatar.url, height: 60) if user.avatar.present?
+    end
+    column :first_name
+    column :last_name
+    column :email
+    column :password_digest
+
+    actions
+  end
+  
 end

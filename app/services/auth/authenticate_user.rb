@@ -3,6 +3,8 @@
 module Auth
   class AuthenticateUser
     def initialize(email, password)
+      puts "AuthenticateUser USER: " + email
+      puts "AuthenticateUser PASS: " + password
       @email = email
       @password = password
     end
@@ -17,9 +19,10 @@ module Auth
 
     def user
       user = User.find_by_email(email)
+      puts "email: " + email + " p: '" + password + "' " + user.inspect
       return user if user&.authenticate(password)
 
-      raise ::Pickup::Exceptions::InvalidLogin
+      raise ::Blindbarber::Exceptions::InvalidLogin
     end
   end
 end
