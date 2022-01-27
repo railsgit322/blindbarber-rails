@@ -11,4 +11,6 @@ This ruby on rails app serves as the API integration into the Blind Barber iOS a
 
 ## Start
 
+`rake db:create`
+`rake db:migrate`
 `rails s`
