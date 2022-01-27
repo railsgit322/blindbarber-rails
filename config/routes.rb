@@ -13,7 +13,9 @@ Rails.application.routes.draw do
       post 'auth/refresh', to: 'authentication#refresh'
       resources :user, only: [:index]
       
-      resources :users, only: %i[show index update create] do
+      resources :users, only: %i[index update create] do
+      
+        resources :haircuts, only: [:index, :create] 
       
       end
       

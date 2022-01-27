@@ -1,4 +1,3 @@
----
 development: 
   cloud_name: "blind-barber"
   api_key: "182642887997881"
@@ -10,4 +9,3 @@ production:
   api_key: "182642887997881"
   api_secret: "aomJ_y3iM3uESccu3EMJLSUY_aQ"
   secure:true
-  

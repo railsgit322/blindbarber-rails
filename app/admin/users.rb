@@ -31,7 +31,6 @@ ActiveAdmin.register User do
     column :first_name
     column :last_name
     column :email
-    column :password_digest
 
     actions
   end
