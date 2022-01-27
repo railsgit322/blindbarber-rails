@@ -15,18 +15,14 @@ Rails.application.routes.draw do
       
       resources :users, only: %i[index update create] do
       
-        resources :haircuts, only: [:index, :create] 
+        resources :haircuts, only: [:index, :create, :destroy, :update] 
       
       end
       
     end
   end
     
-    
-  
-  
   get '/apple-app-site-association' => 'universal_links#apple_site_assoc'
   get '/.well-known/apple-app-site-association' => 'universal_links#apple_site_assoc'
-  
   
 end
