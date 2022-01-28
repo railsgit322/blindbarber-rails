@@ -17,7 +17,7 @@ module Auth
     def user
       @user ||= User.find(decoded_auth_token[:user_id]) if decoded_auth_token
     rescue ActiveRecord::RecordNotFound => e
-      raise ::Pickup::Exceptions::InvalidAuthToken
+      raise ::Blindbarber::Exceptions::InvalidAuthToken
     end
 
     def decoded_auth_token
@@ -29,7 +29,7 @@ module Auth
         return headers['Authorization'].split(' ').last
       end
 
-      raise ::Pickup::Exceptions::UnauthorizedRequest
+      raise ::Blindbarber::Exceptions::UnauthorizedRequest
     end
   end
 end

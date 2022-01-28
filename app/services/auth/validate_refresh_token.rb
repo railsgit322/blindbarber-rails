@@ -10,7 +10,7 @@ module Auth
       encrypted_token = encrypt_token(refresh_token)
       user = User.find_by_refresh_token(encrypted_token)
 
-      raise ::Pickup::Exceptions::InvalidAuthToken unless user
+      raise ::Blindbarber::Exceptions::InvalidAuthToken unless user
 
       user
     end
