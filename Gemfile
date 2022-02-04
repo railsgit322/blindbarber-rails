@@ -64,6 +64,8 @@ gem 'oj'
 
 gem 'httparty'
 gem 'sendgrid-ruby'
+gem 'country_select', '~> 6.0'
+gem 'dotenv-rails'
 
 gem 'rubocop', require: false
 
