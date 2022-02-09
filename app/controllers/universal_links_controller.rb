@@ -10,6 +10,7 @@ class UniversalLinksController < ActionController::Base
 
 	paths = ["/*"]
 	appID = "95JG2MWZX2.com.blindbarber"
+	appClipID = ""
 
 	render content_type: 'application/pkcs7-mime', # 'application/json',
 	  json: {
@@ -24,6 +25,9 @@ class UniversalLinksController < ActionController::Base
 		},
 		webcredentials: {
 		  apps: [appID]
+		},
+		appclips: {
+		  apps: [appClipID]
 		}
 	  }
   end

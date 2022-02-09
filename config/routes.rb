@@ -16,6 +16,12 @@ Rails.application.routes.draw do
       resources :users, only: %i[index update create] do
       
         resources :haircuts, only: [:index, :create, :destroy, :update] 
+        
+        collection do
+          post :forgot_password
+          post :password_reset
+        end
+        
       
       end
       

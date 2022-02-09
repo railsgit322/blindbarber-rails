@@ -43,6 +43,11 @@ class Api::V1::UsersController < Api::BaseController
     else
       @current_user.update! user_params
     end
+    if params[:delete_avatar].present? 
+      puts "DELETE AVATAR"
+      @current_user.remove_avatar!
+      @current_user.save!
+    end
 
     user_payload = UserBlueprint.render @current_user
     render json: user_payload, status: :ok

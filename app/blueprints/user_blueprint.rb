@@ -5,6 +5,6 @@ class UserBlueprint < Blueprinter::Base
 
   fields :first_name, :last_name, :email, :phone, :avatar_url, :created_at
 
-
+  fields :haircuts_count
   
 end
