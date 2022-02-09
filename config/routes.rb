@@ -12,6 +12,16 @@ Rails.application.routes.draw do
       post 'auth/refresh', to: 'authentication#refresh'
       resources :user, only: [:index]
 
+      resources :subscriptions do
+        collection do
+          get "selling_plan_groups"
+          post "product_variant_join_selling_plan_groups"
+          post "product_variant_leave_selling_plan_groups"
+          post "product_join_selling_plan_groups"
+          post "product_leave_selling_plan_groups"
+        end
+      end
+      get 'shopify-token', to: 'subscriptions#generate_token'
       resources :users, only: %i[index update create] do
         resources :haircuts, only: [:index, :create, :destroy, :update]
         resources :addresses, only: [:index, :create, :destroy, :update, :show] do
