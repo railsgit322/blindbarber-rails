@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_02_01_001851) do
+ActiveRecord::Schema.define(version: 2022_02_07_152638) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -27,6 +27,21 @@ ActiveRecord::Schema.define(version: 2022_02_01_001851) do
     t.index ["author_type", "author_id"], name: "index_active_admin_comments_on_author"
     t.index ["namespace"], name: "index_active_admin_comments_on_namespace"
     t.index ["resource_type", "resource_id"], name: "index_active_admin_comments_on_resource"
+  end
+
+  create_table "addresses", force: :cascade do |t|
+    t.integer "user_id"
+    t.string "address1"
+    t.string "address2"
+    t.string "city"
+    t.string "province"
+    t.string "country"
+    t.string "zip"
+    t.string "company"
+    t.string "phone"
+    t.boolean "is_default", default: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "admin_users", force: :cascade do |t|
@@ -52,6 +67,15 @@ ActiveRecord::Schema.define(version: 2022_02_01_001851) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["user_id"], name: "index_haircuts_on_user_id"
+  end
+
+  create_table "shopify_store_accesses", force: :cascade do |t|
+    t.string "store_name"
+    t.string "code"
+    t.string "admin_access_token"
+    t.string "storefront_access_token"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "users", force: :cascade do |t|

@@ -3,7 +3,7 @@
 class Api::V1::AddressesController < Api::BaseController
   def index
     addresses = @current_user.addresses
-    @addresses = HaircutBlueprint.render(addresses)
+    @addresses = AddressBlueprint.render(addresses)
 
     render json: @addresses, status: :ok
   end
