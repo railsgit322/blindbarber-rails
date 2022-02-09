@@ -5,13 +5,16 @@ class User < ApplicationRecord
 	validates :email, presence: true, uniqueness: true
 	validates :password, length: { minimum: 8 }, if: :password_digest_changed?
 
-	has_many :haircuts
 	has_many :addresses
-
+	has_many :haircuts, counter_cache: :haircuts_count, dependent: :destroy
+	
 	mount_uploader :avatar, UserAvatarUploader
 
 	def avatar_url
 		avatar.url
 	end
+
+	
+
 
 end

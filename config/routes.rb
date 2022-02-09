@@ -29,6 +29,12 @@ Rails.application.routes.draw do
             post '/default', to: "addresses#default"
           end
         end
+
+        collection do
+          post :forgot_password
+          post :password_reset
+        end
+        
       end
     end
   end
