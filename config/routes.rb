@@ -11,7 +11,7 @@ Rails.application.routes.draw do
       post 'auth/login', to: 'authentication#login'
       post 'auth/refresh', to: 'authentication#refresh'
       resources :user, only: [:index]
-
+      resources :customers
       resources :subscriptions do
         collection do
           get "selling_plan_groups"
@@ -24,6 +24,7 @@ Rails.application.routes.draw do
       get 'shopify-token', to: 'subscriptions#generate_token'
       resources :users, only: %i[index update create] do
         resources :haircuts, only: [:index, :create, :destroy, :update]
+        resources :payment_methods, only: [:index, :create, :destroy, :update]
         resources :addresses, only: [:index, :create, :destroy, :update, :show] do
           member do
             post '/default', to: "addresses#default"
@@ -34,7 +35,7 @@ Rails.application.routes.draw do
           post :forgot_password
           post :password_reset
         end
-        
+
       end
     end
   end
