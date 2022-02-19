@@ -10,7 +10,7 @@ class Api::V1::PaymentMethodsController < Api::BaseController
   def create
     session = ::Shopify::PaymentMethod::CreateSession.call(payment_method_params[:payment_method_detail])
     if session and session["id"]
-      response = ::Shopify::PaymentMethod::CreatePaymentMethod.call(payment_method_params, session and session["id"])
+      response = ::Shopify::PaymentMethod::CreatePaymentMethod.call(payment_method_params, session) and session["id"])
     end
     render json: response
   end
@@ -18,7 +18,7 @@ class Api::V1::PaymentMethodsController < Api::BaseController
   def update
     session = ::Shopify::PaymentMethod::CreateSession.call(payment_method_params[:payment_method_detail])
     if session and session["id"]
-      response = ::Shopify::PaymentMethod::UpdatePaymentMethod.call(payment_method_params, session and session["id"])
+      response = ::Shopify::PaymentMethod::UpdatePaymentMethod.call(payment_method_params, session) and session["id"])
     end
     render json: response
   end
