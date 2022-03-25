@@ -2,47 +2,35 @@
 
 class Api::V1::AddressesController < Api::BaseController
   def index
-    addresses = @current_user.addresses
-    @addresses = AddressBlueprint.render(addresses)
-
-    render json: @addresses, status: :ok
+    response = Shopify::Addresses.call
+    render json: response
   end
 
-  def default
-    address = @current_user.addresses.find(params[:id])
-    address_params[:is_default] = true
-    address.update! address_params
-    @address = AddressBlueprint.render(address)
-
-    render json: @address, status: :ok
+  def create
+    response = Shopify::Address::CreateAddress.call(address_params)
+    render json: response
   end
 
   def show
-    address = @current_user.addresses.find(params[:id])
-    @address = AddressBlueprint.render(address)
-
-    render json: @address, status: :ok
+    response = Shopify::Address::ShowAddress.call(params[:address]["id"])
+    render json: response
   end
 
   def update
-		address = @current_user.addresses.find(params[:id])
-		address.update! address_params
-		@address = AddressBlueprint.render(address)
-
-		render json: @address, status: :ok
+    response = Shopify::Address::UpdateAddress.call(address_params)
+    render json: response
   end
 
-	def destroy
-		address = @current_user.addresses.find(params[:id])
-		address.destroy
-		render json: {}, status: :ok
-	end
+  def destroy
+    response = Shopify::Address::DeleteAddress.call(params[:address]["id"])
+    render json: response
+  end
 
   private
 
   def address_params
     params.require(:address).permit(
-       :address1, :address2, :city, :province, :country, :zip, :company, :phone, :is_default, :created_at
+      :id, :customer_id, :address1, :first_name, :last_name, :city, :province, :country_code, :zip, :phone
     )
   end
 end

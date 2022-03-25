@@ -47,13 +47,19 @@ gem "bootsnap", require: false
 # Use Sass to process CSS
 gem "sassc-rails"
 
+# gem 'shopify_api'
+# gem 'graphql-client'
+
+gem 'byebug', '~> 11.1', '>= 11.1.3'
+
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 # gem "image_processing", "~> 1.2"
 
-gem 'activeadmin', github: 'tagliala/activeadmin', branch: 'feature/railties-7'
+# gem 'activeadmin', github: 'tagliala/activeadmin', branch: 'feature/railties-7'
 gem 'arbre', github: 'activeadmin/arbre' # FIXME: remove
 gem 'inherited_resources', github: 'activeadmin/inherited_resources'
 
+gem 'activeadmin', git: 'https://github.com/naveed-ahmad/activeadmin.git', branch: 'rails7'
 
 gem 'devise'
 gem 'carrierwave', '~> 1.0'
@@ -86,6 +92,9 @@ group :development do
 end
 
 group :test do
+  # gem 'cucumber-rails', require: false
+  # database_cleaner is not required, but highly recommended
+  # gem 'database_cleaner'
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
   gem "capybara"
   gem "selenium-webdriver"

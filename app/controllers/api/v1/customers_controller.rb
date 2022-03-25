@@ -3,27 +3,27 @@
 class Api::V1::CustomersController < Api::BaseController
 
   def index
-    response = ::Shopify::Customers:.call
+    response = Shopify::Customers.call
     render json: response
   end
 
   def create
-    response = ::Shopify::Customer::CreateCustomer.call(customer_params)
+    response = Shopify::Customer::CreateCustomer.call(customer_params)
     render json: response
   end
 
   def show
-    response = ::Shopify::Customer::CreateCustomer.call(params[:id])
+    response = Shopify::Customer::ShowCustomer.call(params[:customer]["id"])
     render json: response
   end
 
   def update
-    response = ::Shopify::Customer::CreateCustomer.call(customer_params)
+    response = Shopify::Customer::UpdateCustomer.call(customer_params)
     render json: response
   end
 
   def destroy
-    response = ::Shopify::Customer::CreateCustomer.call(params[:id])
+    response = Shopify::Customer::DeleteCustomer.call(params[:customer]["id"])
     render json: response
   end
 

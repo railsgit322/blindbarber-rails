@@ -3,10 +3,10 @@
 module Shopify
   module Customer
     class CreateCustomer
-      def initialize(firstName, lastName, email)
-        @firstName = firstName
-        @lastName = lastName
-        @email = email
+      def initialize(customer_params)
+        @firstName = customer_params[:firstName]
+        @lastName = customer_params[:lastName]
+        @email = customer_params[:email]
       end
 
       def self.call(*args)
@@ -15,28 +15,43 @@ module Shopify
 
       def create_customer
         url = URI("https://#{shopify_store_name}.myshopify.com/admin/api/2022-01/graphql.json")
-        query = "mutation customerCreate($input: CustomerInput!) { customerCreate(input: $input) { customer { firstName, lastname, email }  userErrors { field, message } } }"
-        variable = {
-          "email": @email,
-          "firstName": @firstName,
-          "lastName": @lastName,
-        }
-        data = {
-          "query" => query,
-          "variables" => variable
-        }
-
-        http = Net::HTTP.new(url.host, url.port)
-        http.use_ssl = true
-        http.verify_mode = OpenSSL::SSL::VERIFY_NONE
-
-        request = Net::HTTP::Post.new(url)
-        request["cookie"] = 'request_method=POST'
-        request["Content-Type"] = 'application/json'
-        request["X-Shopify-Access-Token"] = shopify_admin_access_token
-        request.body = data.to_json
-        response = http.request(request)
-        response.read_body
+          variable ={
+            "input": {
+              "email": @email,
+              "firstName": @firstName,
+              "lastName": @lastName
+            }
+            }
+          query = "mutation customerCreate($input: CustomerInput!) {
+            customerCreate(input: $input) {
+              userErrors { 
+                field 
+                message 
+              }
+              customer {
+                id
+                email
+                firstName
+                lastName
+              }
+            }
+          }"
+         
+          data = {
+            "query" => query,
+            "variables" => variable
+          }
+          http = Net::HTTP.new(url.host, url.port)
+          http.use_ssl = true
+          http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+  
+          request = Net::HTTP::Post.new(url)
+          request["cookie"] = 'request_method=POST'
+          request["Content-Type"] = 'application/json'
+          request["X-Shopify-Access-Token"] = ENV['SHOPIFY_ADMIN_ACCESS_TOKEN']
+          request.body = data.to_json
+          response = http.request(request)
+          response.read_body
       rescue
         OpenStruct.new({status: false})
       end

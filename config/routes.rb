@@ -11,7 +11,7 @@ Rails.application.routes.draw do
       post 'auth/login', to: 'authentication#login'
       post 'auth/refresh', to: 'authentication#refresh'
       resources :user, only: [:index]
-      resources :customers
+      resources :customers 
       resources :subscriptions do
         collection do
           get "selling_plan_groups"

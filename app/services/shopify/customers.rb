@@ -11,22 +11,23 @@ module Shopify
 
     def customers
       url = URI("https://#{shopify_store_name}.myshopify.com/admin/api/2022-01/graphql.json")
-      query = "{ 	customers(first: 10) { edges { node { id, displayName, email }}}"
-      data = {
-        "query" => query,
-      }
-
-      http = Net::HTTP.new(url.host, url.port)
-      http.use_ssl = true
-      http.verify_mode = OpenSSL::SSL::VERIFY_NONE
-
-      request = Net::HTTP::Post.new(url)
-      request["cookie"] = 'request_method=POST'
-      request["Content-Type"] = 'application/json'
-      request["X-Shopify-Access-Token"] = shopify_admin_access_token
-      request.body = data.to_json
-      response = http.request(request)
-      response.read_body
+        # url = URI("https://#{shopify_store_name}.myshopify.com/admin/api/2022-01/graphql.json")
+        query = "{ customers(first: 10) { edges { node { id, displayName, email }}}}"
+        data = {
+          "query" => query,
+        }
+  
+        http = Net::HTTP.new(url.host, url.port)
+        http.use_ssl = true
+        http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+  
+        request = Net::HTTP::Post.new(url)
+        request["cookie"] = 'request_method=POST'
+        request["Content-Type"] = 'application/json'
+        request["X-Shopify-Access-Token"] = ENV['SHOPIFY_ADMIN_ACCESS_TOKEN']
+        request.body = data.to_json
+        response = http.request(request)
+        response.read_body
     rescue
       OpenStruct.new({status: false})
     end

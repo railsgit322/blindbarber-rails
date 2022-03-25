@@ -3,7 +3,8 @@
 class Auth::JsonWebToken
   class << self
     EXPIRATION = Time.now.to_i + (3600 * 24 * 30)
-    TOKEN_SECRET = Rails.application.credentials.secret_key_base
+    # TOKEN_SECRET = Rails.application.credentials.secret_key_base
+    TOKEN_SECRET = ENV['SECRET_KEY_BASE']
 
     def encode(payload, exp = EXPIRATION)
       payload[:exp] = exp.to_i
